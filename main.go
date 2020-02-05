@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -40,19 +41,17 @@ func showMenu() {
 
 //wait for user menu input
 func userInput() Book {
-	var (
-		title  string
-		author string
-		isbn   string
-	)
-	//get user input
+	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Println("please add new book info")
 	fmt.Print("enter book name:")
-	fmt.Scanln(&title)
+	scanner.Scan()
+	title := scanner.Text()
 	fmt.Print("enter book author:")
-	fmt.Scanln(&author)
+	scanner.Scan()
+	author := scanner.Text()
 	fmt.Print("enter book isbn:")
-	fmt.Scanln(&isbn)
+	scanner.Scan()
+	isbn := scanner.Text()
 	b := newBook(len(db), title, author, isbn)
 	return b
 }
